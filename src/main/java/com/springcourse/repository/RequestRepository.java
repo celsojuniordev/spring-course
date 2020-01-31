@@ -14,6 +14,6 @@ public interface RequestRepository extends JpaRepository<Request, Long> {
 
     List<User> findAllByOwnerId(Long id);
 
-    @Query("UPDATE Request SET state = ?2 WHERE id = ?1")
+    @Query("UPDATE request SET state = ?2 WHERE id = ?1")
     Request updateStatus(Long id, RequestState requestState);
 }
