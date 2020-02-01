@@ -66,4 +66,11 @@ public class RequestRepositoryTests {
 
         assertThat(result.size()).isEqualTo(4);
     }
+
+    @Test
+    public void updateStatusRequest() {
+        int affectedRows = requestRepository.updateStatus(5L, RequestState.IN_PROGRESS);
+
+        assertThat(affectedRows).isEqualTo(1);
+    }
 }
