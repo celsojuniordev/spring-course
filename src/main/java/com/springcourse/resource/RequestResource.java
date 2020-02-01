@@ -33,12 +33,6 @@ public class RequestResource {
         return ResponseEntity.ok(result);
     }
 
-    @GetMapping("/{ownerId}")
-    public ResponseEntity<List<Request>> findAllByOwnerId(@PathVariable("ownerId") Long ownerId) {
-        List<Request> result = service.findAllByOwnerId(ownerId);
-        return ResponseEntity.ok(result);
-    }
-
     @PutMapping("/{id}")
     public ResponseEntity<Request> update(@RequestBody Request request) {
         Request result = service.update(request);
