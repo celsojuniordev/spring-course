@@ -3,9 +3,14 @@ package com.springcourse.service;
 import com.springcourse.domain.RequestStage;
 import com.springcourse.enums.RequestState;
 import com.springcourse.esception.NotFoundException;
+import com.springcourse.model.PageModel;
+import com.springcourse.model.PageRequestModel;
 import com.springcourse.repository.RequestRepository;
 import com.springcourse.repository.RequestStageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -36,8 +41,10 @@ public class RequestStageService {
         return result.orElseThrow(() -> new NotFoundException("There are not stage with id -> " + id));
     }
 
-    public List<RequestStage> findAllByRequestId(Long requestId) {
-        List<RequestStage> result = requestStageRepository.findAllByRequestId(requestId);
-        return result;
+    public PageModel<RequestStage> findAllByRequestId(Long requestId, PageRequestModel pr) {
+        Pageable pageable = PageRequest.of(pr.getPage(), pr.getSize());
+        Page<RequestStage> page = requestStageRepository.findAllByRequestId(requestId, pageable);
+
+        return new PageModel<>((int) page.getTotalElements(), page.getSize(), page.getTotalPages(), page.getContent());
     }
 }

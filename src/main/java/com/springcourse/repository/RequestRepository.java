@@ -2,6 +2,8 @@ package com.springcourse.repository;
 
 import com.springcourse.domain.Request;
 import com.springcourse.enums.RequestState;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -19,4 +21,6 @@ public interface RequestRepository extends JpaRepository<Request, Long> {
     @Modifying
     @Query("UPDATE request SET state = ?2 WHERE id = ?1")
     int updateStatus(Long id, RequestState requestState);
+
+    Page<Request> findAllByOwnerId(Long id, Pageable pageable);
 }

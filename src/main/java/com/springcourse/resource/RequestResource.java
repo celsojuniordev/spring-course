@@ -2,9 +2,12 @@ package com.springcourse.resource;
 
 import com.springcourse.domain.Request;
 import com.springcourse.domain.RequestStage;
+import com.springcourse.model.PageModel;
+import com.springcourse.model.PageRequestModel;
 import com.springcourse.service.RequestService;
 import com.springcourse.service.RequestStageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,9 +31,10 @@ public class RequestResource {
     }
 
     @GetMapping
-    public ResponseEntity<List<Request>> findAll() {
-        List<Request> result = service.findAll();
-        return ResponseEntity.ok(result);
+    public ResponseEntity<PageModel<Request>> findAll(@RequestParam("page") int page, @RequestParam("size") int size) {
+        PageRequestModel pr = new PageRequestModel(page, size);
+        PageModel<Request> pm = service.findAll(pr);
+        return ResponseEntity.ok(pm);
     }
 
     @PutMapping("/{id}")
@@ -46,8 +50,13 @@ public class RequestResource {
     }
 
     @GetMapping("/{requestId}/stages")
-    public ResponseEntity<List<RequestStage>> findAllStagesById(@PathVariable("requestId") Long requestId) {
-        List<RequestStage> result = stageService.findAllByRequestId(requestId);
-        return ResponseEntity.ok(result);
+    public ResponseEntity<PageModel<RequestStage>> findAllStagesById(
+            @PathVariable("requestId") Long requestId,
+            @RequestParam("page") int page,
+            @RequestParam("size") int size) {
+        PageRequestModel pr = new PageRequestModel(page, size);
+        PageModel<RequestStage> pm = stageService.findAllByRequestId(requestId, pr);
+
+        return ResponseEntity.ok(pm);
     }
 }
