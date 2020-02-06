@@ -31,7 +31,9 @@ public class RequestResource {
     }
 
     @GetMapping
-    public ResponseEntity<PageModel<Request>> findAll(@RequestParam("page") int page, @RequestParam("size") int size) {
+    public ResponseEntity<PageModel<Request>> findAll(
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "size", defaultValue = "10") int size) {
         PageRequestModel pr = new PageRequestModel(page, size);
         PageModel<Request> pm = service.findAll(pr);
         return ResponseEntity.ok(pm);
@@ -52,8 +54,8 @@ public class RequestResource {
     @GetMapping("/{requestId}/stages")
     public ResponseEntity<PageModel<RequestStage>> findAllStagesById(
             @PathVariable("requestId") Long requestId,
-            @RequestParam("page") int page,
-            @RequestParam("size") int size) {
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "size", defaultValue = "10") int size) {
         PageRequestModel pr = new PageRequestModel(page, size);
         PageModel<RequestStage> pm = stageService.findAllByRequestId(requestId, pr);
 
