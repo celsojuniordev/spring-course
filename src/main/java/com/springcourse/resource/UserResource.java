@@ -3,6 +3,7 @@ package com.springcourse.resource;
 import com.springcourse.domain.Request;
 import com.springcourse.domain.User;
 import com.springcourse.dto.UserLoginDTO;
+import com.springcourse.dto.UserUpdateRoleDTO;
 import com.springcourse.model.PageModel;
 import com.springcourse.model.PageRequestModel;
 import com.springcourse.service.RequestService;
@@ -74,5 +75,15 @@ public class UserResource {
         PageModel<Request> pm = requestService.listAllByOwnerIdOnLazyModel(id, pr);
 
         return ResponseEntity.ok(pm);
+    }
+
+    @PatchMapping("/role/{id}")
+    public ResponseEntity<?> updateRole(@RequestBody UserUpdateRoleDTO userDTO, @PathVariable("id") Long id) {
+        User user = new User();
+        userDTO.setId(userDTO.getId());
+        userDTO.setRole(userDTO.getRole());
+
+        service.updateRole(user);
+        return ResponseEntity.ok().build();
     }
 }

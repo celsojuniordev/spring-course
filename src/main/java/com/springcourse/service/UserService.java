@@ -56,4 +56,8 @@ public class UserService {
         PageModel<User> pm = new PageModel<>((int)page.getTotalElements(), page.getSize(), page.getTotalPages(), page.getContent());
         return pm;
     }
+
+    public int updateRole(User user) {
+        return userRepository.updateRole(user.getId(), user.getRole());
+    }
 }
