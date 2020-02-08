@@ -18,6 +18,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Modifying
     @Transactional(readOnly = false)
-    @Query("UPDATE user SET role = 2 WHERE id = ?1")
+    @Query("UPDATE user SET role = ?2 WHERE id = ?1")
     int updateRole(Long id, Role role);
 }
