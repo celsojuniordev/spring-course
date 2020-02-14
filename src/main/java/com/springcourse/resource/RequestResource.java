@@ -2,6 +2,8 @@ package com.springcourse.resource;
 
 import com.springcourse.domain.Request;
 import com.springcourse.domain.RequestStage;
+import com.springcourse.dto.RequestSaveDTO;
+import com.springcourse.dto.RequestUpdateDTO;
 import com.springcourse.model.PageModel;
 import com.springcourse.model.PageRequestModel;
 import com.springcourse.service.RequestService;
@@ -12,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -25,9 +28,18 @@ public class RequestResource {
     private RequestStageService stageService;
 
     @PostMapping
-    public ResponseEntity<Request> save(@RequestBody Request request) {
+    public ResponseEntity<Request> save(@RequestBody @Valid RequestSaveDTO requestSaveDTO) {
+        Request request = requestSaveDTO.transformToRequest();
         Request result = service.save(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Request> update(@PathVariable("id") Long id, @RequestBody @Valid RequestUpdateDTO requestUpdateDTO) {
+        Request request = requestUpdateDTO.transformToRequest();
+        request.setId(id);
+        Request result = service.update(request);
+        return ResponseEntity.ok(result);
     }
 
     @GetMapping
@@ -37,12 +49,6 @@ public class RequestResource {
         PageRequestModel pr = new PageRequestModel(page, size);
         PageModel<Request> pm = service.findAll(pr);
         return ResponseEntity.ok(pm);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Request> update(@RequestBody Request request) {
-        Request result = service.update(request);
-        return ResponseEntity.ok(result);
     }
 
     @GetMapping("/{id}")
