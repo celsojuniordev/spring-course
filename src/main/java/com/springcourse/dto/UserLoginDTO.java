@@ -17,6 +17,6 @@ public class UserLoginDTO {
     @Email(message = "Invalid email address")
     private String email;
 
-    @NotBlank(message = "Password required")
+    @NotBlank(message = "Senha é obeigatório")
     private String password;
 }

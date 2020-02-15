@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 @Setter
 public class UserUpdateRoleDTO {
 
-    @NotNull(message = "Role required")
+    @NotNull(message = "Papél é obrigatório")
     private Role role;
 
 }

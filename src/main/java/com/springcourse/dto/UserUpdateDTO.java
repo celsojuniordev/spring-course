@@ -16,7 +16,7 @@ import java.util.List;
 @Setter
 public class UserUpdateDTO {
 
-    @NotBlank
+    @NotBlank(message = "Nome é obrigatório")
     private String name;
 
     @Email

@@ -18,7 +18,7 @@ import java.util.List;
 @Setter
 public class UserSaveDTO {
 
-    @NotBlank
+    @NotBlank(message = "Nome é obrigatório")
     private String name;
 
     @Email
@@ -27,7 +27,7 @@ public class UserSaveDTO {
     @Size(min = 7, max = 99, message = "Senha deve possuir de 7 a 99 caracteres.")
     private String password;
 
-    @NotNull
+    @NotNull(message = "Papél é obrigatório")
     private Role role;
 
     private List<Request> requests = new ArrayList<>();
