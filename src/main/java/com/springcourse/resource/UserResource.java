@@ -13,6 +13,10 @@ import com.springcourse.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -26,6 +30,9 @@ public class UserResource {
 
     @Autowired
     private RequestService requestService;
+
+    @Autowired
+    private AuthenticationManager authManager;
 
     @PostMapping
     public ResponseEntity<User> save(@RequestBody @Valid UserSaveDTO userSaveDTO) {
@@ -61,10 +68,10 @@ public class UserResource {
 
     @PostMapping("/login")
     public ResponseEntity<User> login(@Valid @RequestBody UserLoginDTO loginDTO) {
-        String email = loginDTO.getEmail();
-        String password = loginDTO.getPassword();
-        User loggedUser = service.login(email, password);
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword());
+        Authentication auth = authManager.authenticate(token);
 
+        SecurityContextHolder.getContext().setAuthentication(auth);
         return ResponseEntity.ok(loggedUser);
     }
 

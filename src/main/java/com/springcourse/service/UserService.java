@@ -75,8 +75,6 @@ public class UserService implements UserDetailsService {
         User user = result.get();
         List<GrantedAuthority> authorities = Arrays.asList(new SimpleGrantedAuthority("ROLE " + user.getRole().name()));
 
-        org.springframework.security.core.userdetails.User userSpring =
-                new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
-        return userSpring;
+        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
     }
 }
