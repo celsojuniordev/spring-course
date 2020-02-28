@@ -14,9 +14,9 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 public class UserLoginDTO {
 
-    @Email(message = "Invalid email address")
+    @Email(message = "Email inválido")
     private String email;
 
-    @NotBlank(message = "Senha é obeigatório")
+    @NotBlank(message = "Senha é obrigatório")
     private String password;
 }
