@@ -56,7 +56,7 @@ public class AuthorizationFilter extends OncePerRequestFilter {
 
             Authentication authentication = new UsernamePasswordAuthenticationToken(email, null, grantedAuthorities);
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            
+
         } catch (Exception e) {
             ApiError apiError = new ApiError(HttpStatus.UNAUTHORIZED.value(), e.getMessage(), new Date());
             PrintWriter writer = httpServletResponse.getWriter();
