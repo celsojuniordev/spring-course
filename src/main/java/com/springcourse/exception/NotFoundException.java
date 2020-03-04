@@ -1,4 +1,4 @@
-package com.springcourse.esception;
+package com.springcourse.exception;
 
 public class NotFoundException extends RuntimeException {
 

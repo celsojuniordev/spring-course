@@ -2,7 +2,7 @@ package com.springcourse.service;
 
 import com.springcourse.domain.Request;
 import com.springcourse.enums.RequestState;
-import com.springcourse.esception.NotFoundException;
+import com.springcourse.exception.NotFoundException;
 import com.springcourse.model.PageModel;
 import com.springcourse.model.PageRequestModel;
 import com.springcourse.repository.RequestRepository;
@@ -13,7 +13,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 @Service
