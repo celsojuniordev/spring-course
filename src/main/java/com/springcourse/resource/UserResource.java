@@ -46,7 +46,7 @@ public class UserResource {
     @Autowired
     private AccessManager accessManager;
 
-    @Secured({ "ROLE_ADMINISTRATOR "})
+    @Secured({ "ROLE_ADMINISTRATOR" })
     @PostMapping
     public ResponseEntity<User> save(@RequestBody @Valid UserSaveDTO userSaveDTO) {
         User user = userSaveDTO.transformToUser();
@@ -112,7 +112,7 @@ public class UserResource {
         return ResponseEntity.ok(pm);
     }
 
-    @Secured({ "ROLE_ADMINISTRATOR "})
+    @Secured({ "ROLE_ADMINISTRATOR" })
     @PatchMapping("/role/{id}")
     public ResponseEntity<?> updateRole(@RequestBody @Valid UserUpdateRoleDTO userDTO, @PathVariable("id") Long id) {
         User user = new User();

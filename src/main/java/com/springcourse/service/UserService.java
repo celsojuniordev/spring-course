@@ -73,7 +73,7 @@ public class UserService implements UserDetailsService {
         if (!result.isPresent()) throw new UsernameNotFoundException("Usuário não encontrado");
 
         User user = result.get();
-        List<GrantedAuthority> authorities = Arrays.asList(new SimpleGrantedAuthority("ROLE " + user.getRole().name()));
+        List<GrantedAuthority> authorities = Arrays.asList(new SimpleGrantedAuthority("ROLE_" + user.getRole().name()));
 
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
     }
