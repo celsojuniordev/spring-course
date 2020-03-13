@@ -24,7 +24,7 @@ public class AccessManager {
         String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Optional<User> user = userRepository.findByEmail(email);
 
-        if (user.isPresent()) throw new NotFoundException("Usuário não encontrado com o email ->" + email);
+        if (!user.isPresent()) throw new NotFoundException("Usuário não encontrado com o email ->" + email);
 
         User result = user.get();
 
@@ -35,7 +35,7 @@ public class AccessManager {
         String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Optional<User> user = userRepository.findByEmail(email);
 
-        if (user.isPresent()) throw new NotFoundException("Usuário não encontrado com o email ->" + email);
+        if (!user.isPresent()) throw new NotFoundException("Usuário não encontrado com o email ->" + email);
 
         User result = user.get();
 
