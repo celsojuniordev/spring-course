@@ -8,7 +8,6 @@ import com.springcourse.dto.UserUpdateDTO;
 import com.springcourse.dto.UserUpdateRoleDTO;
 import com.springcourse.model.PageModel;
 import com.springcourse.model.PageRequestModel;
-import com.springcourse.security.AccessManager;
 import com.springcourse.security.JwtManager;
 import com.springcourse.service.RequestService;
 import com.springcourse.service.UserService;
@@ -42,9 +41,6 @@ public class UserResource {
 
     @Autowired
     private JwtManager jwtManager;
-
-    @Autowired
-    private AccessManager accessManager;
 
     @Secured({ "ROLE_ADMINISTRATOR" })
     @PostMapping
