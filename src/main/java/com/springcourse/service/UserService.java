@@ -59,8 +59,7 @@ public class UserService implements UserDetailsService {
         Pageable pageable = PageRequest.of(pr.getPage(), pr.getSize());
         Page<User> page = userRepository.findAll(pageable);
 
-        PageModel<User> pm = new PageModel<>((int)page.getTotalElements(), page.getSize(), page.getTotalPages(), page.getContent());
-        return pm;
+        return new PageModel<>((int)page.getTotalElements(), page.getSize(), page.getTotalPages(), page.getContent());
     }
 
     public int updateRole(User user) {
