@@ -39,7 +39,7 @@ public class S3Service {
             metadata.setContentLength(file.getSize());
 
             try {
-                PutObjectRequest request = new PutObjectRequest(originalName, s3FileName, file.getInputStream(), metadata)
+                PutObjectRequest request = new PutObjectRequest(bucketName, s3FileName, file.getInputStream(), metadata)
                                                     .withCannedAcl(CannedAccessControlList.PublicRead);
 
                 s3.putObject(request);

@@ -29,7 +29,7 @@ public class RequestRepositoryTests {
     public void AsaveTest() {
         User owner = new User();
         owner.setId(1L);
-        Request request = new Request(null, "Novo notebook", "Pretendo obter um laptop HD", new Date(), RequestState.OPEN, owner, null);
+        Request request = new Request(null, "Novo notebook", "Pretendo obter um laptop HD", new Date(), RequestState.OPEN, owner, null, null);
 
         Request result = requestRepository.save(request);
         assertThat(result.getId()).isEqualTo(5L);
@@ -39,7 +39,7 @@ public class RequestRepositoryTests {
     public void updateTeste() {
         User owner = new User();
         owner.setId(1L);
-        Request request = new Request(5L, "Novo notebook", "Pretendo obter um laptop HD, de ram 16 GB", null, RequestState.OPEN, owner, null);
+        Request request = new Request(5L, "Novo notebook", "Pretendo obter um laptop HD, de ram 16 GB", null, RequestState.OPEN, owner, null, null);
 
         Request result = requestRepository.save(request);
         assertThat(result.getDescription()).isEqualTo("Pretendo obter um laptop HD, de ram 16 GB");

@@ -33,7 +33,6 @@ public class RequestUpdateDTO {
     private List<RequestStage> stages = new ArrayList<>();
 
     public Request transformToRequest() {
-        Request request = new Request(null, this.subject, this.description, null, this.state, this.owner, stages);
-        return request;
+        return new Request(null, this.subject, this.description, null, this.state, this.owner, stages, null);
     }
 }
