@@ -28,7 +28,7 @@ public class S3Service {
         this.region = awsRegion;
     }
 
-    public List<UploadedFileModule> uoload(MultipartFile[] files) {
+    public List<UploadedFileModule> upload(MultipartFile[] files) {
 
         List<UploadedFileModule> uploadedFileModules = new ArrayList<>();
         for (MultipartFile file : files) {
