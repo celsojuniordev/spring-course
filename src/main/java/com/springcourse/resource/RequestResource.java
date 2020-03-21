@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "requests")
@@ -51,9 +52,8 @@ public class RequestResource {
 
     @GetMapping
     public ResponseEntity<PageModel<Request>> findAll(
-            @RequestParam(value = "page", defaultValue = "0") int page,
-            @RequestParam(value = "size", defaultValue = "10") int size) {
-        PageRequestModel pr = new PageRequestModel(page, size);
+            @RequestParam Map<String, String> params) {
+        PageRequestModel pr = new PageRequestModel(params);
         PageModel<Request> pm = service.findAll(pr);
         return ResponseEntity.ok(pm);
     }
@@ -67,9 +67,8 @@ public class RequestResource {
     @GetMapping("/{requestId}/stages")
     public ResponseEntity<PageModel<RequestStage>> findAllStagesById(
             @PathVariable("requestId") Long requestId,
-            @RequestParam(value = "page", defaultValue = "0") int page,
-            @RequestParam(value = "size", defaultValue = "10") int size) {
-        PageRequestModel pr = new PageRequestModel(page, size);
+            @RequestParam Map<String, String> params) {
+        PageRequestModel pr = new PageRequestModel(params);
         PageModel<RequestStage> pm = stageService.findAllByRequestId(requestId, pr);
 
         return ResponseEntity.ok(pm);
@@ -78,9 +77,8 @@ public class RequestResource {
     @GetMapping("/{requestId}/files")
     public ResponseEntity<PageModel<RequestFile>> findAllFilesById(
             @PathVariable("requestId") Long requestId,
-            @RequestParam(value = "page", defaultValue = "0") int page,
-            @RequestParam(value = "size", defaultValue = "10") int size) {
-        PageRequestModel pr = new PageRequestModel(page, size);
+            @RequestParam Map<String, String> params) {
+        PageRequestModel pr = new PageRequestModel(params);
         PageModel<RequestFile> pm = fileService.listAllByRequestId(requestId, pr);
 
         return ResponseEntity.ok(pm);
