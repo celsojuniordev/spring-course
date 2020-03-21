@@ -8,7 +8,6 @@ import com.springcourse.model.PageRequestModel;
 import com.springcourse.repository.RequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +40,7 @@ public class RequestService {
 
     public PageModel<Request> findAll(PageRequestModel pr) {
 
-        Pageable pageable = PageRequest.of(pr.getPage(), pr.getSize());
+        Pageable pageable = pr.toSpringPageRequest();
         Page<Request> page = requestRepository.findAll(pageable);
 
         return new PageModel<>((int)page.getTotalElements(), page.getSize(), page.getTotalPages(), page.getContent());
@@ -49,7 +48,7 @@ public class RequestService {
 
     public PageModel<Request> listAllByOwnerIdOnLazyModel(Long id, PageRequestModel pr) {
 
-        Pageable pageable = PageRequest.of(pr.getPage(), pr.getSize());
+        Pageable pageable = pr.toSpringPageRequest();
         Page<Request> page = requestRepository.findAllByOwnerId(id, pageable);
 
         return new PageModel<>((int)page.getTotalElements(), page.getSize(), page.getTotalPages(), page.getContent());

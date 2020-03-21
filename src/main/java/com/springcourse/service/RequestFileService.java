@@ -9,7 +9,6 @@ import com.springcourse.repository.RequestFileRepository;
 import com.springcourse.service.s3.S3Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -46,7 +45,7 @@ public class RequestFileService {
     }
 
     public PageModel<RequestFile> listAllByRequestId(Long id, PageRequestModel prm) {
-        Pageable pageable = PageRequest.of(prm.getPage(), prm.getSize());
+        Pageable pageable = prm.toSpringPageRequest();
         Page<RequestFile> page = requestFileRepository.findAllByRequestId(id, pageable);
 
         return new PageModel<>((int)page.getTotalElements(), page.getSize(), page.getTotalPages(), page.getContent());

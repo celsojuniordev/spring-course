@@ -9,7 +9,6 @@ import com.springcourse.repository.RequestRepository;
 import com.springcourse.repository.RequestStageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +40,7 @@ public class RequestStageService {
     }
 
     public PageModel<RequestStage> findAllByRequestId(Long requestId, PageRequestModel pr) {
-        Pageable pageable = PageRequest.of(pr.getPage(), pr.getSize());
+        Pageable pageable = pr.toSpringPageRequest();
         Page<RequestStage> page = requestStageRepository.findAllByRequestId(requestId, pageable);
 
         return new PageModel<>((int) page.getTotalElements(), page.getSize(), page.getTotalPages(), page.getContent());

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.Map;
 
@@ -20,5 +21,9 @@ public class PageRequestModel {
         if (params.containsKey("page")) page = Integer.parseInt(params.get("page"));
         if (params.containsKey("size")) size = Integer.parseInt(params.get("size"));
 
+    }
+
+    public PageRequest toSpringPageRequest() {
+        return PageRequest.of(page, size);
     }
 }
